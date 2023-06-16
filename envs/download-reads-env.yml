@@ -1,0 +1,5 @@
+name: download-reads
+channels:
+  - bioconda
+dependencies:
+  - sra-tools

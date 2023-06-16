@@ -1,0 +1,15 @@
+name: pgt-pgs-markers
+channels:
+  - conda-forge
+  - bioconda
+  - anaconda
+dependencies:
+  - python=3.8.3
+  - pandas=1.1.5
+  - biopython=1.78
+  - numpy=1.19.2
+  - matplotlib=3.2.2
+  - fastx_toolkit=0.0.14
+  - samtools=1.10
+  - raxml-ng=1.1.0
+  - gffread=0.11.7
