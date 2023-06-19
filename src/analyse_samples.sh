@@ -56,7 +56,6 @@ for chromosome in chr_{1..18}; do
 done
 sbatch --kill-on-invalid-dep yes -o /dev/null --wait -d $dependency --wrap ""
 python3 src/coverage_stats_to_markers.py $ref_fasta results/coverage_stats results/markers.csv
-gzip results/coverage/*.csv
 
 mkdir -p results/tree
 cat results/samples/*/*_third_bases_concat.ffn >results/tree/msa.ffn
