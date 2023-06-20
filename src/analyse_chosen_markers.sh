@@ -43,7 +43,3 @@ tail -n +2 data/primers/marker_primer_regions.csv | while IFS=, read -r chromoso
 done
 python src/draw_sample_msas.py
 wait < <(jobs -p)
-
-python3 src/draw_tree.py data/metadata/metadata.csv \
-    results/tree/msa_80pct_covered.raxml.support \
-    figures/tree
