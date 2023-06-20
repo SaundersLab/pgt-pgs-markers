@@ -71,8 +71,8 @@ sbatch -J tree -p $partitions --mem 400G -J raxml-ng -c 32 -o logs/raxml-ng.out 
 python3 src/tree_input_coverage_filter.py results/tree/msa.ffn 80 results/tree/msa_80pct_covered.ffn
 
 jobid=$(
-    sbatch -J tree_80pct_covered -p $partitions --mem 400G -J raxml-ng -c 32 -o logs/raxml-ng_80pct_covered \
-    -e raxml-ng_80pct_covered -t 14-00:00 --wrap "
+    sbatch --parsable -J raxml-ng_80pct_covered -p $partitions --mem 400G -c 32 -o logs/raxml-ng_80pct_covered.out \
+    -e raxml-ng_80pct_covered.err -t 14-00:00 --wrap "
 source ~/mambaforge/bin/activate envs/pgt-pgs-markers
 raxml-ng \
     --all --msa results/tree/msa_80pct_covered.ffn --model GTR+G --tree pars{10},rand{10} \
@@ -80,4 +80,9 @@ raxml-ng \
 "
 )
 sbatch --kill-on-invalid-dep yes -o /dev/null --wait -d afterok:$jobid --wrap ""
-sbatch src/report.sh
+sbatch -p $partitions src/report.sh
+
+mkdir -p figures
+python3 src/draw_tree.py data/metadata/metadata.csv \
+    results/tree/msa_80pct_covered.raxml.support \
+    figures/tree
